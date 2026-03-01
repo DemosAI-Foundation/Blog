@@ -14,19 +14,20 @@ timezone:
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy # the main title
+title: DemosAI # the main title
 
-tagline: A text-focused Jekyll theme # it will display as the subtitle
+tagline: AI for the people # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  A minimal, responsive and feature-rich Jekyll theme for technical writing.
+  DemosAI is an Foundation created for promoting true open sourcing of knowledge for the people, specifically around artificial intelligence.
+  DemosAIs work is open source and we plan to release full steps on working towards artificial general intelligence.
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
 url: ""
 
 github:
-  username: GodcCmplexxx # change to your GitHub username
+  username: DemosAI-Foundation # change to your GitHub username
 
 twitter:
   username: twitter_username # change to your Twitter username
