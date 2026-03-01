@@ -5,18 +5,30 @@ icon: fas fa-pen-nib
 order: 5
 ---
 
-To contribute to **DemosAI-Foundation**, use the button below. This will open the GitHub editor with a pre-filled template.
+Click the button below to open the editor in a popup on this page.
 
-<div id="submission-box" style="margin: 2rem 0; padding: 40px; border: 2px dashed #666; border-radius: 12px; text-align: center;">
-  <a id="gh-link" href="#" class="btn btn-primary btn-lg" style="display: none; text-decoration: none;">
-    <i class="fab fa-github"></i> Open Editor on GitHub
-  </a>
-  <p id="gh-loader">Loading your secure editor link...</p>
+<div class="text-center" style="margin-top: 3rem;">
+  <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#ghModal">
+    <i class="fab fa-github"></i> Write a Guest Post
+  </button>
+</div>
+
+<div class="modal fade" id="ghModal" tabindex="-1" aria-labelledby="ghModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" style="max-width: 90%; height: 90%;">
+    <div class="modal-content" style="height: 100%;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ghModalLabel">GitHub Editor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="padding: 0;">
+        <iframe id="gh-iframe" src="" style="width: 100%; height: 100%; border: none;"></iframe>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
-  /* This function runs immediately and also handles Chirpy's Pjax navigation */
-  function loadGithubLink() {
+  function setupModal() {
     const now = new Date();
     const dateStr = now.toISOString().split('T')[0];
     const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
@@ -37,19 +49,15 @@ Start typing here...`;
     const encodedTemplate = encodeURIComponent(template);
     const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
 
-    const linkEl = document.getElementById('gh-link');
-    const loaderEl = document.getElementById('gh-loader');
-
-    if (linkEl && loaderEl) {
-      linkEl.href = githubUrl;
-      linkEl.style.display = 'inline-block';
-      loaderEl.style.display = 'none';
+    const iframe = document.getElementById('gh-iframe');
+    if (iframe) {
+      iframe.src = githubUrl;
     }
   }
 
-  /* Run now */
-  loadGithubLink();
-
-  /* Run if user navigates back to this tab without refreshing */
-  document.addEventListener('pjax:success', loadGithubLink);
+  // Initialize
+  setupModal();
+  
+  // Handle Chirpy's Pjax navigation
+  document.addEventListener('pjax:success', setupModal);
 </script>
