@@ -16,44 +16,64 @@ To contribute to **DemosAI-Foundation**, use the button below. This will open th
 
 <script>
   function loadGithubLink() {
-    const now = new Date();
-    const dateStr = now.toISOString().split('T')[0];
-    const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-    
-    const org = "DemosAI-Foundation";
-    const repo = "Blog";
-    
-    // We build the template as an array to guarantee line breaks (%0A)
-    const templateLines = [
-      "---",
-      'title: "Welcome to DemosAI!"',
-      `date: ${dateStr} ${timeStr}:00 +0000`,
-      "categories: [Artificial general intelligence]",
-      "tags: [agi, ai, news, open-source]",
-      "pin: false",
-      "---",
-      "",
-      "## Lorem ipsum",
-      "Lorem ipsum",
-      ""
-    ];
+    // Wrap in a small timeout to ensure Chirpy has rendered the HTML
+    setTimeout(() => {
+      const linkEl = document.getElementById('gh-link');
+      const loaderEl = document.getElementById('gh-loader');
 
-    // Join with a real newline character
-    const template = templateLines.join("\n");
-    const encodedTemplate = encodeURIComponent(template);
-    
-    const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
+      if (!linkEl || !loaderEl) {
+        console.log("Elements not found yet, retrying...");
+        return; 
+      }
 
-    const linkEl = document.getElementById('gh-link');
-    const loaderEl = document.getElementById('gh-loader');
+      const now = new Date();
+      const dateStr = now.toISOString().split('T')[0];
+      const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+      
+      const org = "DemosAI-Foundation";
+      const repo = "Blog";
+      
+      const templateLines = [
+        "---",
+        'title: "Welcome to DemosAI!"',
+        `date: ${dateStr} ${timeStr}:00 +0000`,
+        "categories: [Artificial general intelligence]",
+        "tags: [agi, ai, news, open-source]",
+        "pin: false",
+        "---",
+        "",
+        "## Introduction",
+        "The DemosAI Foundation journey is one of learning, teaching, and creation.",
+        "",
+        "## The Journey",
+        "Join us in keeping intelligence in the hands of the people.",
+        "",
+        "```python",
+        "# file: helloworld.py",
+        "def hello_world():",
+        "    print(\"Goodbye!\")",
+        "```"
+      ];
 
-    if (linkEl && loaderEl) {
+      const template = templateLines.join("\n");
+      const encodedTemplate = encodeURIComponent(template);
+      
+      const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
+
       linkEl.href = githubUrl;
       linkEl.style.display = 'inline-block';
       loaderEl.style.display = 'none';
-    }
+      console.log("GitHub link loaded successfully.");
+    }, 200); // 200ms delay is usually enough for Pjax/Chirpy
   }
 
-  loadGithubLink();
+  // Initialize on direct load
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    loadGithubLink();
+  } else {
+    document.addEventListener("DOMContentLoaded", loadGithubLink);
+  }
+
+  // Handle Chirpy's internal navigation (Pjax)
   document.addEventListener('pjax:success', loadGithubLink);
 </script>
