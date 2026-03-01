@@ -5,21 +5,20 @@ icon: fas fa-pen-nib
 order: 5
 ---
 
-To contribute a post to the **DemosAI-Foundation** blog, use the button below.
+To contribute to **DemosAI-Foundation**, use the button below. This will open the GitHub editor with a pre-filled template.
 
-### Quick Guide:
-1. **Login:** You'll need a GitHub account.
-2. **Write:** Change the title and add your text below the header lines (`---`).
-3. **Submit:** Click **"Commit changes"** and then **"Create Pull Request"**.
-
-<div id="submission-box" style="margin: 2rem 0; padding: 20px; border: 1px solid #333; border-radius: 8px; text-align: center;">
-  <p>Preparing your GitHub editor...</p>
+<div id="submission-box" style="margin: 2rem 0; padding: 40px; border: 2px dashed #666; border-radius: 12px; text-align: center;">
+  <a id="gh-link" href="#" class="btn btn-primary btn-lg" style="display: none; text-decoration: none;">
+    <i class="fab fa-github"></i> Open Editor on GitHub
+  </a>
+  <p id="gh-loader">Loading your secure editor link...</p>
 </div>
 
 <script>
-  (function() {
+  /* This function runs immediately and also handles Chirpy's Pjax navigation */
+  function loadGithubLink() {
     const now = new Date();
-    const dateStr = now.toISOString().split('T')[0]; 
+    const dateStr = now.toISOString().split('T')[0];
     const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
     
     const org = "DemosAI-Foundation";
@@ -36,13 +35,21 @@ tags: [contribution]
 Start typing here...`;
 
     const encodedTemplate = encodeURIComponent(template);
-    // Note the 'message' parameter—this helps your Auto-Merge Action identify the post!
     const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
 
-    document.getElementById('submission-box').innerHTML = `
-      <a href="${githubUrl}" class="btn btn-primary" target="_blank" style="text-decoration: none; font-weight: bold;">
-        <i class="fab fa-github"></i> Open Editor on GitHub
-      </a>
-    `;
-  })();
+    const linkEl = document.getElementById('gh-link');
+    const loaderEl = document.getElementById('gh-loader');
+
+    if (linkEl && loaderEl) {
+      linkEl.href = githubUrl;
+      linkEl.style.display = 'inline-block';
+      loaderEl.style.display = 'none';
+    }
+  }
+
+  /* Run now */
+  loadGithubLink();
+
+  /* Run if user navigates back to this tab without refreshing */
+  document.addEventListener('pjax:success', loadGithubLink);
 </script>
