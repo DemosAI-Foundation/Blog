@@ -14,22 +14,6 @@ To contribute to **DemosAI-Foundation**, use the button below. This will open th
   <p id="gh-loader">Loading your secure editor link...</p>
 </div>
 
----
-layout: page
-title: Write
-icon: fas fa-pen-nib
-order: 5
----
-
-To contribute to **DemosAI-Foundation**, use the button below. This will open the GitHub editor with our official post template.
-
-<div id="submission-box" style="margin: 2rem 0; padding: 40px; border: 2px dashed #666; border-radius: 12px; text-align: center;">
-  <a id="gh-link" href="#" class="btn btn-primary btn-lg" style="display: none; text-decoration: none;">
-    <i class="fab fa-github"></i> Open Editor on GitHub
-  </a>
-  <p id="gh-loader">Loading your secure editor link...</p>
-</div>
-
 <script>
   function loadGithubLink() {
     const now = new Date();
