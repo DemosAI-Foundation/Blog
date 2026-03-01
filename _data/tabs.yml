@@ -17,6 +17,6 @@ about:
   order: 5
 forum:
   title: Forum
-  url: https://github.com/DemosAI-Foundation/Blog/discussions
+  url: https://github.com/DemosAI-Foundation/new/main?filename=_posts/submission.md&value=---%0Alayout:%20post%0Atitle:%20%22New%20Post%22%0A---%0A%0AWrite%20content%20here!
   icon: 'fas fa-comments'
   order: 6

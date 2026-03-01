@@ -1,0 +1,43 @@
+name: Auto Approve and Rename Posts
+on:
+  pull_request:
+    paths:
+      - '_posts/**'
+
+jobs:
+  auto-approve:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Rename file with Unique ID
+        run: |
+          # Get the current date and a random 4-digit ID
+          UNIQUE_ID=$(date +%s | tail -c 5)
+          DATE=$(date +%Y-%m-%d)
+          
+          # Find the file the user just submitted
+          SUBMITTED_FILE=$(find _posts -name "submission.md")
+          
+          if [ -f "$SUBMITTED_FILE" ]; then
+            NEW_NAME="_posts/$DATE-post-$UNIQUE_ID.md"
+            mv "$SUBMITTED_FILE" "$NEW_NAME"
+            
+            git config --global user.name "Forum-Bot"
+            git config --global user.email "bot@github.com"
+            git add .
+            git commit -m "Rename submission to unique filename"
+            git push
+          fi
+
+      - name: Auto-merge PR
+        uses: "pascalgn/automerge-action@v0.16.2"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_METHOD: "squash"
