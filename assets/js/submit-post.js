@@ -1,6 +1,6 @@
-const GITHUB_TOKEN = "github_pat_xxxx"; // fine-grained, issues-only on this repo
-const GITHUB_OWNER = "your-username";
-const GITHUB_REPO  = "your-repo";
+const GITHUB_TOKEN = "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"; // fine-grained, issues-only on this repo
+const GITHUB_OWNER = "DemosAI-Foundation";
+const GITHUB_REPO  = "Blog";
 
 async function submitPost(event) {
   event.preventDefault();
