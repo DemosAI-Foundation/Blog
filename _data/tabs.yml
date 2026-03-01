@@ -16,7 +16,7 @@ about:
   icon: 'fas fa-info-circle'
   order: 5
 forum:
-  title: Forum
+  title: Start Thread
   url: https://github.com/DemosAI-Foundation/new/main?filename=_posts/submission.md&value=---%0Alayout:%20post%0Atitle:%20%22New%20Post%22%0A---%0A%0AWrite%20content%20here!
   icon: 'fas fa-comments'
   order: 6
