@@ -1,0 +1,22 @@
+# _data/tabs.yml
+
+home:
+  icon: 'fas fa-home'
+  order: 1
+categories:
+  icon: 'fas fa-stream'
+  order: 2
+tags:
+  icon: 'fas fa-tags'
+  order: 3
+archives:
+  icon: 'fas fa-archive'
+  order: 4
+about:
+  icon: 'fas fa-info-circle'
+  order: 5
+forum:
+  title: Forum
+  url: https://github.com/DemosAI-Foundation/Blog/discussions
+  icon: 'fas fa-comments'
+  order: 6
