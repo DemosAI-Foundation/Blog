@@ -5,7 +5,23 @@ icon: fas fa-pen-nib
 order: 5
 ---
 
-To contribute to **DemosAI-Foundation**, use the button below. This will open the GitHub editor with a pre-filled template.
+To contribute to **DemosAI-Foundation**, use the button below. This will open the GitHub editor with our official post template.
+
+<div id="submission-box" style="margin: 2rem 0; padding: 40px; border: 2px dashed #666; border-radius: 12px; text-align: center;">
+  <a id="gh-link" href="#" class="btn btn-primary btn-lg" style="display: none; text-decoration: none;">
+    <i class="fab fa-github"></i> Open Editor on GitHub
+  </a>
+  <p id="gh-loader">Loading your secure editor link...</p>
+</div>
+
+---
+layout: page
+title: Write
+icon: fas fa-pen-nib
+order: 5
+---
+
+To contribute to **DemosAI-Foundation**, use the button below. This will open the GitHub editor with our official post template.
 
 <div id="submission-box" style="margin: 2rem 0; padding: 40px; border: 2px dashed #666; border-radius: 12px; text-align: center;">
   <a id="gh-link" href="#" class="btn btn-primary btn-lg" style="display: none; text-decoration: none;">
@@ -15,7 +31,6 @@ To contribute to **DemosAI-Foundation**, use the button below. This will open th
 </div>
 
 <script>
-  /* This function runs immediately and also handles Chirpy's Pjax navigation */
   function loadGithubLink() {
     const now = new Date();
     const dateStr = now.toISOString().split('T')[0];
@@ -24,15 +39,18 @@ To contribute to **DemosAI-Foundation**, use the button below. This will open th
     const org = "DemosAI-Foundation";
     const repo = "Blog";
     
+    // This template exactly matches your requested DemosAI style
     const template = `---
-title: "Your Post Title"
+title: "TITLE"
 date: ${dateStr} ${timeStr}:00 +0000
-categories: [Guest]
-tags: [contribution]
+categories: [Guestpost]
+tags: [Guestpost]
+pin: false
 ---
 
-## My Post
-Start typing here...`;
+## Introduction
+Lorem ipsum
+`;
 
     const encodedTemplate = encodeURIComponent(template);
     const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
@@ -47,9 +65,6 @@ Start typing here...`;
     }
   }
 
-  /* Run now */
   loadGithubLink();
-
-  /* Run if user navigates back to this tab without refreshing */
   document.addEventListener('pjax:success', loadGithubLink);
 </script>
