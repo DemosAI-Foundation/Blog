@@ -5,20 +5,27 @@ icon: fas fa-pen-nib
 order: 5
 ---
 
-To contribute a post to the **DemosAI-Foundation** blog, click the button below. This will open the GitHub editor in a focused window.
-
-<div class="text-center" style="margin: 4rem 0; padding: 50px; border: 2px dashed var(--main-border-color); border-radius: 15px; background: var(--main-bg);">
-  <i class="fas fa-edit fa-3x mb-3" style="color: var(--link-color);"></i>
-  <h3>Draft your post</h3>
-  <p class="text-muted">A new window will open for you to sign in and write.</p>
+<div class="text-center" style="margin: 4rem 0; padding: 60px 20px; border: 2px dashed var(--main-border-color); border-radius: 20px; background: var(--main-bg); box-shadow: var(--card-shadow);">
+  <div class="mb-4">
+    <i class="fab fa-github fa-4x" style="color: var(--link-color);"></i>
+  </div>
+  <h2 class="fw-bold">Contribute to DemosAI-Foundation</h2>
+  <p class="text-muted mb-4" style="max-width: 500px; margin: 0 auto;">
+    Your post will be opened in a new tab using the GitHub Web Editor. 
+    Once you "Commit Changes," our system will automatically process your post.
+  </p>
   
-  <button id="open-editor-btn" class="btn btn-primary btn-lg mt-3" style="min-width: 200px;">
-    <i class="fab fa-github"></i> Open Writing Editor
-  </button>
+  <a id="direct-gh-link" href="#" class="btn btn-primary btn-lg" target="_blank" rel="noopener" style="min-width: 250px; padding: 15px 30px; font-weight: bold; font-size: 1.2rem; border-radius: 10px;">
+    Start Writing Now <i class="fas fa-external-link-alt ms-2" style="font-size: 0.9rem;"></i>
+  </a>
+
+  <div class="mt-4 small text-muted">
+    <i class="fas fa-info-circle me-1"></i> Requires a GitHub account to save.
+  </div>
 </div>
 
 <script>
-  function initGuestPost() {
+  function generateSubmissionLink() {
     const now = new Date();
     const dateStr = now.toISOString().split('T')[0];
     const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
@@ -33,33 +40,22 @@ categories: [Guest]
 tags: [contribution]
 ---
 
-## Introduction
-Start writing your content here...`;
+## My Post
+Start typing here...`;
 
     const encodedTemplate = encodeURIComponent(template);
+    // Note: 'message' is included to trigger your auto-merge action!
     const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
 
-    const btn = document.getElementById('open-editor-btn');
-    if (btn) {
-      btn.onclick = function() {
-        // Window sizing and centering
-        const w = 1100;
-        const h = 850;
-        const left = (window.screen.width / 2) - (w / 2);
-        const top = (window.screen.height / 2) - (h / 2);
-        
-        window.open(
-          githubUrl, 
-          "GitHubEditor", 
-          `width=${w},height=${h},top=${top},left=${left},resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no`
-        );
-      };
+    const linkBtn = document.getElementById('direct-gh-link');
+    if (linkBtn) {
+      linkBtn.href = githubUrl;
     }
   }
 
   // Initial load
-  initGuestPost();
+  generateSubmissionLink();
   
   // Re-run for Chirpy Pjax navigation
-  document.addEventListener('pjax:success', initGuestPost);
+  document.addEventListener('pjax:success', generateSubmissionLink);
 </script>
