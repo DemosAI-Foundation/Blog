@@ -1,1 +1,17 @@
+---
+layout: post
+title: "How to Build a Flask API"
+date: 2026-03-01
+categories: [Programming, Python]
+---
 
+## Introduction
+Here is how you write a code block. On this theme, a **Copy** button will appear in the top right corner automatically.
+
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return "Hello World!"
