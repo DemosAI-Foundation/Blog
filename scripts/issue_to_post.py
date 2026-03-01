@@ -9,12 +9,12 @@ def extract_field(body: str, label: str) -> str:
     match = re.search(pattern, body, re.DOTALL)
     return match.group(1).strip() if match else ""
 
-issue_number = os.environ["ISSUE_NUMBER"]
-issue_title  = os.environ["ISSUE_TITLE"]
-body         = os.environ["ISSUE_BODY"]
-repo         = os.environ["REPO"]
+number = os.environ["DISCUSSION_NUMBER"]
+title  = os.environ["DISCUSSION_TITLE"]
+body   = os.environ["DISCUSSION_BODY"]
+repo   = os.environ["REPO"]
 
-title       = extract_field(body, "Post Title") or issue_title
+title       = extract_field(body, "Post Title") or title
 description = extract_field(body, "Short Description")
 tags_raw    = extract_field(body, "Tags")
 author      = extract_field(body, "Your Name") or "Guest"
@@ -46,15 +46,13 @@ os.makedirs("_posts", exist_ok=True)
 with open(filename, "w") as f:
     f.write(post_content)
 
-print(f"Created: {filename}")
-
-branch = f"post/issue-{issue_number}-{slug}"
+branch = f"post/discussion-{number}-{slug}"
 
 subprocess.run(["git", "config", "user.name",  "github-actions[bot]"], check=True)
 subprocess.run(["git", "config", "user.email", "github-actions[bot]@users.noreply.github.com"], check=True)
 subprocess.run(["git", "checkout", "-b", branch], check=True)
 subprocess.run(["git", "add", filename], check=True)
-subprocess.run(["git", "commit", "-m", f"feat: add guest post '{title}' (issue #{issue_number})"], check=True)
+subprocess.run(["git", "commit", "-m", f"feat: add guest post '{title}' (discussion #{number})"], check=True)
 subprocess.run(["git", "push", "origin", branch], check=True)
 
 from github import Github
@@ -65,14 +63,14 @@ gh_repo = g.get_repo(repo)
 pr = gh_repo.create_pull(
     title=f"Guest Post: {title}",
     body=(
-        f"Automatically generated from issue #{issue_number}.\n\n"
+        f"Automatically generated from discussion #{number}.\n\n"
         f"**Author:** {author}\n"
         f"**Description:** {description}\n\n"
-        f"Review the post content and merge to publish.\n\n"
-        f"Closes #{issue_number}"
+        f"Review the post and merge to publish."
     ),
     head=branch,
-    base="main",  # change to 'master' if needed
+    base="main",
 )
 
 print(f"Pull request created: {pr.html_url}")
+
