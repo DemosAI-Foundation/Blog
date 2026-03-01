@@ -5,30 +5,20 @@ icon: fas fa-pen-nib
 order: 5
 ---
 
-Click the button below to open the editor in a popup on this page.
+To contribute a post to the **DemosAI-Foundation** blog, click the button below. This will open the GitHub editor in a focused window.
 
-<div class="text-center" style="margin-top: 3rem;">
-  <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#ghModal">
-    <i class="fab fa-github"></i> Write a Guest Post
+<div class="text-center" style="margin: 4rem 0; padding: 50px; border: 2px dashed var(--main-border-color); border-radius: 15px; background: var(--main-bg);">
+  <i class="fas fa-edit fa-3x mb-3" style="color: var(--link-color);"></i>
+  <h3>Draft your post</h3>
+  <p class="text-muted">A new window will open for you to sign in and write.</p>
+  
+  <button id="open-editor-btn" class="btn btn-primary btn-lg mt-3" style="min-width: 200px;">
+    <i class="fab fa-github"></i> Open Writing Editor
   </button>
 </div>
 
-<div class="modal fade" id="ghModal" tabindex="-1" aria-labelledby="ghModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered" style="max-width: 90%; height: 90%;">
-    <div class="modal-content" style="height: 100%;">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ghModalLabel">GitHub Editor</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" style="padding: 0;">
-        <iframe id="gh-iframe" src="" style="width: 100%; height: 100%; border: none;"></iframe>
-      </div>
-    </div>
-  </div>
-</div>
-
 <script>
-  function setupModal() {
+  function initGuestPost() {
     const now = new Date();
     const dateStr = now.toISOString().split('T')[0];
     const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
@@ -43,21 +33,33 @@ categories: [Guest]
 tags: [contribution]
 ---
 
-## My Post
-Start typing here...`;
+## Introduction
+Start writing your content here...`;
 
     const encodedTemplate = encodeURIComponent(template);
     const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
 
-    const iframe = document.getElementById('gh-iframe');
-    if (iframe) {
-      iframe.src = githubUrl;
+    const btn = document.getElementById('open-editor-btn');
+    if (btn) {
+      btn.onclick = function() {
+        // Window sizing and centering
+        const w = 1100;
+        const h = 850;
+        const left = (window.screen.width / 2) - (w / 2);
+        const top = (window.screen.height / 2) - (h / 2);
+        
+        window.open(
+          githubUrl, 
+          "GitHubEditor", 
+          `width=${w},height=${h},top=${top},left=${left},resizable=yes,scrollbars=yes,status=no,location=no,toolbar=no,menubar=no`
+        );
+      };
     }
   }
 
-  // Initialize
-  setupModal();
+  // Initial load
+  initGuestPost();
   
-  // Handle Chirpy's Pjax navigation
-  document.addEventListener('pjax:success', setupModal);
+  // Re-run for Chirpy Pjax navigation
+  document.addEventListener('pjax:success', initGuestPost);
 </script>
