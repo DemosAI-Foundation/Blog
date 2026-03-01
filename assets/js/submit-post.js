@@ -1,4 +1,4 @@
-const GITHUB_TOKEN = "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; // fine-grained, issues-only on this repo
+const GITHUB_TOKEN = "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"; // fine-grained, issues-only on this repo
 const GITHUB_OWNER = "DemosAI-Foundation";
 const GITHUB_REPO  = "Blog";
 const CATEGORY_NAME = "Post Submissions";
