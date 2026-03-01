@@ -1,4 +1,4 @@
-const GITHUB_TOKEN = "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"; // fine-grained, issues-only on this repo
+const GITHUB_TOKEN = "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"; // fine-grained, issues-only on this repo
 const GITHUB_OWNER = "DemosAI-Foundation";
 const GITHUB_REPO  = "Blog";
 const CATEGORY_NAME = "Post Submissions";
