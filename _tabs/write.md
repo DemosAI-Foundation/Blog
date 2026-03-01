@@ -39,20 +39,25 @@ To contribute to **DemosAI-Foundation**, use the button below. This will open th
     const org = "DemosAI-Foundation";
     const repo = "Blog";
     
-    // This template exactly matches your requested DemosAI style
-    const template = `---
-title: "TITLE"
-date: ${dateStr} ${timeStr}:00 +0000
-categories: [Guestpost]
-tags: [Guestpost]
-pin: false
----
+    // We build the template as an array to guarantee line breaks (%0A)
+    const templateLines = [
+      "---",
+      'title: "Welcome to DemosAI!"',
+      `date: ${dateStr} ${timeStr}:00 +0000`,
+      "categories: [Artificial general intelligence]",
+      "tags: [agi, ai, news, open-source]",
+      "pin: false",
+      "---",
+      "",
+      "## Lorem ipsum",
+      "Lorem ipsum",
+      ""
+    ];
 
-## Introduction
-Lorem ipsum
-`;
-
+    // Join with a real newline character
+    const template = templateLines.join("\n");
     const encodedTemplate = encodeURIComponent(template);
+    
     const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
 
     const linkEl = document.getElementById('gh-link');
