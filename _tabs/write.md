@@ -9,36 +9,28 @@ To contribute to **DemosAI-Foundation**, use the button below. This will open th
 
 <div id="submission-box" style="margin: 2rem 0; padding: 40px; border: 2px dashed #666; border-radius: 12px; text-align: center;">
   <a id="gh-link" 
-     href="#" 
+     href="javascript:void(0);" 
      target="_blank" 
      rel="noopener noreferrer" 
      class="btn btn-primary btn-lg" 
      style="display: none; text-decoration: none;">
     <i class="fab fa-github"></i> Open Editor on GitHub
   </a>
-  <p id="gh-loader">Loading your secure editor link...</p>
+  <p id="gh-loader">Connecting to GitHub...</p>
 </div>
 
 <script>
   (function() {
-    function initGithubLink() {
+    function buildLink() {
       const linkEl = document.getElementById('gh-link');
       const loaderEl = document.getElementById('gh-loader');
-
-      // If elements aren't in the DOM yet, wait 100ms and try again
-      if (!linkEl || !loaderEl) {
-        setTimeout(initGithubLink, 100);
-        return;
-      }
+      
+      if (!linkEl) return;
 
       const now = new Date();
       const dateStr = now.toISOString().split('T')[0];
       const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
       
-      const org = "DemosAI-Foundation";
-      const repo = "Blog";
-      
-      // Explicitly joining with \n ensures GitHub sees real line breaks
       const template = [
         '---',
         'title: "Your Post Title"',
@@ -52,24 +44,22 @@ To contribute to **DemosAI-Foundation**, use the button below. This will open th
         'Start typing here...'
       ].join('\n');
 
-      const encodedTemplate = encodeURIComponent(template);
-      const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
+      const encodedValue = encodeURIComponent(template);
+      const url = `https://github.com/DemosAI-Foundation/Blog/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedValue}&message=guest-post:%20new%20contribution`;
 
-      linkEl.href = githubUrl;
+      linkEl.href = url;
       linkEl.style.display = 'inline-block';
-      loaderEl.style.display = 'none';
+      if (loaderEl) loaderEl.style.display = 'none';
     }
 
-    // Try to run immediately
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initGithubLink);
-    } else {
-      initGithubLink();
-    }
+    // Trigger 1: Standard load
+    buildLink();
 
-    // Handle Chirpy's Pjax navigation
-    document.addEventListener('pjax:success', initGithubLink);
-    // Extra safety for standard page transitions
-    window.addEventListener('pageshow', initGithubLink);
+    // Trigger 2: Chirpy / Pjax dynamic navigation
+    document.addEventListener('pjax:complete', buildLink);
+    document.addEventListener('pjax:success', buildLink);
+    
+    // Trigger 3: Final fallback for aggressive caching
+    window.addEventListener('load', buildLink);
   })();
 </script>
