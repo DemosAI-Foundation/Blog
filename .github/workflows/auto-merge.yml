@@ -1,43 +1,30 @@
-name: Auto Approve and Rename Posts
+name: Auto-Approve and Merge Guest Posts
+
 on:
   pull_request:
+    types: [opened, reopened]
     paths:
-      - '_posts/**'
+      - '_posts/**' # Only trigger if the change is in the _posts folder
 
 jobs:
   auto-approve:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
       pull-requests: write
+      contents: write
+    
+    # Optional: Only auto-merge if the PR is from a specific label or has a specific title
+    if: contains(github.event.pull_request.title, 'guest-post')
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Approve PR
+        uses: hmarr/auto-approve-action@v4
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Rename file with Unique ID
-        run: |
-          # Get the current date and a random 4-digit ID
-          UNIQUE_ID=$(date +%s | tail -c 5)
-          DATE=$(date +%Y-%m-%d)
-          
-          # Find the file the user just submitted
-          SUBMITTED_FILE=$(find _posts -name "submission.md")
-          
-          if [ -f "$SUBMITTED_FILE" ]; then
-            NEW_NAME="_posts/$DATE-post-$UNIQUE_ID.md"
-            mv "$SUBMITTED_FILE" "$NEW_NAME"
-            
-            git config --global user.name "Forum-Bot"
-            git config --global user.email "bot@github.com"
-            git add .
-            git commit -m "Rename submission to unique filename"
-            git push
-          fi
-
-      - name: Auto-merge PR
-        uses: "pascalgn/automerge-action@v0.16.2"
+      - name: Merge PR
+        uses: pascalgn/automerge-action@v0.16.2
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          MERGE_METHOD: "squash"
+          MERGE_METHOD: "merge"
+          MERGE_LABELS: "" # Leave empty to merge all matching PRs
