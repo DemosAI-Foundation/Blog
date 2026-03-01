@@ -27,4 +27,4 @@ Fill in the form below and your post will be submitted for review.
 
 <div id="status"></div>
 
-<script src="/assets/js/submit-post.js"></script>
+<script src="/Blog/assets/js/submit-post.js"></script>
