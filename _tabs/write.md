@@ -28,24 +28,24 @@ To contribute to **DemosAI-Foundation**, use the button below. This will open th
     const org = "DemosAI-Foundation";
     const repo = "Blog";
     
-    /* Template formatted for Chirpy:
-       - Double newlines (\n\n) ensure proper Markdown block separation.
-       - Timezone offset (+0000) included as per Chirpy defaults.
-    */
-    const template = `---
-title: "Your Post Title"
-date: ${dateStr} ${timeStr}:00 +0000
-categories: [Guest]
-tags: [contribution]
----
-
-## My Post
-
-Start typing here...
-
-`;
+    // Constructing the template with explicit newlines
+    // We use \n to ensure the JS string has breaks, 
+    // and encodeURIComponent will turn them into %0A for the URL.
+    const template = [
+      '---',
+      'title: "Your Post Title"',
+      `date: ${dateStr} ${timeStr}:00 +0000`,
+      'categories: [Guest]',
+      'tags: [contribution]',
+      '---',
+      '',
+      '## My Post',
+      '',
+      'Start typing here...'
+    ].join('\n');
 
     const encodedTemplate = encodeURIComponent(template);
+    // Note: Use 'value' parameter for the file content
     const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
 
     const linkEl = document.getElementById('gh-link');
@@ -58,7 +58,6 @@ Start typing here...
     }
   }
 
-  /* Initialization for standard and Pjax loads */
   loadGithubLink();
   document.addEventListener('pjax:success', loadGithubLink);
 </script>
