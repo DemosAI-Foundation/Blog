@@ -66,22 +66,7 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
     const repo = "Blog";
     
     /* Pre-filling the GitHub link with image placeholders too */
-    const template = `---
-title: "Your Post Title"
-date: ${dateStr} ${timeStr}:00 +0000
-categories: [Guest]
-tags: [contribution]
-image:
-  path: https://your-image-url.com/header.jpg
-  alt: Image description
----
-
-## Introduction
-
-Start typing here...
-
-![Body Image](https://your-image-url.com/image.jpg)
-`;
+    const template = ``;
 
     const encodedTemplate = encodeURIComponent(template);
     const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
