@@ -5,7 +5,7 @@ icon: fas fa-pen-nib
 order: 5
 ---
 
-To contribute to **DemosAI-Foundation**, use the button below. This will open the GitHub editor in a new tab with a pre-filled template.
+To contribute to **DemosAI-Foundation**, use the button below to open the GitHub editor in a new tab. Then, copy the template below and paste it into the editor.
 
 <div id="submission-box" style="margin: 2rem 0; padding: 40px; border: 2px dashed #666; border-radius: 12px; text-align: center;">
   <a id="gh-link" 
@@ -20,11 +20,11 @@ To contribute to **DemosAI-Foundation**, use the button below. This will open th
 </div>
 
 ### Copy Template Example
-Please copy this example structure for the new post:
+Please copy this example structure for your new post:
 
 <div style="position: relative; margin-top: 1rem;">
-<button onclick="copyTemplate()" class="btn btn-outline-secondary btn-sm" style="position: absolute; right: 10px; top: 10px; z-index: 10;">
-  <i class="fas fa-copy"></i> Copy
+<button id="copy-btn" onclick="copyTemplate()" class="btn btn-outline-secondary btn-sm" style="position: absolute; right: 10px; top: 10px; z-index: 10; transition: all 0.3s ease;">
+  <i id="copy-icon" class="fas fa-copy"></i> <span id="copy-text">Copy</span>
 </button>
 <pre id="template-code" style="padding: 1.5rem; background: #f6f8fa; border-radius: 8px; border: 1px solid #ddd; text-align: left; overflow-x: auto;">
 ---
@@ -52,39 +52,37 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 <script>
   function copyTemplate() {
     const code = document.getElementById('template-code').innerText;
+    const btn = document.getElementById('copy-btn');
+    const icon = document.getElementById('copy-icon');
+    const text = document.getElementById('copy-text');
+
     navigator.clipboard.writeText(code).then(() => {
-      alert('Template copied to clipboard!');
+      // Success State
+      btn.classList.replace('btn-outline-secondary', 'btn-success');
+      btn.style.color = '#fff';
+      icon.classList.replace('fa-copy', 'fa-check');
+      text.innerText = 'Copied!';
+
+      // Revert after 2 seconds
+      setTimeout(() => {
+        btn.classList.replace('btn-success', 'btn-outline-secondary');
+        btn.style.color = '';
+        icon.classList.replace('fa-check', 'fa-copy');
+        text.innerText = 'Copy';
+      }, 2000);
     });
   }
 
   function loadGithubLink() {
     const now = new Date();
     const dateStr = now.toISOString().split('T')[0];
-    const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
     
     const org = "DemosAI-Foundation";
     const repo = "Blog";
     
-    /* Pre-filling the GitHub link with image placeholders too */
-    const template = `---
-title: "Your Post Title"
-date: ${dateStr} ${timeStr}:00 +0000
-categories: [Guest]
-tags: [contribution]
-image:
-  path: https://your-image-url.com/header.jpg
-  alt: Image description
----
-
-## Introduction
-
-Start typing here...
-
-![Body Image](https://your-image-url.com/image.jpg)
-`;
-
-    const encodedTemplate = encodeURIComponent(template);
-    const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
+    // Minimal template just to give them a starting point
+    const minimalTemplate = encodeURIComponent("---\n\n---");
+    const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-new-post.md&value=${minimalTemplate}&message=guest-post:%20new%20contribution`;
 
     const linkEl = document.getElementById('gh-link');
     const loaderEl = document.getElementById('gh-loader');
