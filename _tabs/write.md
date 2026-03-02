@@ -5,7 +5,7 @@ icon: fas fa-pen-nib
 order: 5
 ---
 
-To contribute to **DemosAI-Foundation**, use the button below to open the GitHub editor. Then, copy the template below and paste it into the new file.
+To contribute to **DemosAI-Foundation**, use the button below. This will open the GitHub editor in a new tab to create a new post.
 
 <div id="submission-box" style="margin: 2rem 0; padding: 40px; border: 2px dashed #666; border-radius: 12px; text-align: center;">
   <a id="gh-link" 
@@ -20,18 +20,18 @@ To contribute to **DemosAI-Foundation**, use the button below to open the GitHub
 </div>
 
 ### Copy Template Example
-Please copy this example structure for your new post:
+Please copy this example structure for the new post:
 
 <div style="position: relative; margin-top: 1rem;">
-<button id="copy-btn" onclick="copyTemplate()" class="btn btn-outline-secondary btn-sm" style="position: absolute; right: 10px; top: 10px; z-index: 10; transition: all 0.3s ease;">
-  <i id="copy-icon" class="fas fa-copy"></i> <span id="copy-text">Copy</span>
+<button onclick="copyTemplate()" class="btn btn-outline-secondary btn-sm" style="position: absolute; right: 10px; top: 10px; z-index: 10;">
+  <i class="fas fa-copy"></i> Copy
 </button>
 <pre id="template-code" style="padding: 1.5rem; background: #f6f8fa; border-radius: 8px; border: 1px solid #ddd; text-align: left; overflow-x: auto;">
 ---
 title: Welcome to the Future of AI
 date: 2026-02-28 14:30:00 +0800
 categories: [Guestpost]
-tags: [agi, ai, news, open-source]
+tags: [ai, guestpost, open-source]
 pin: false
 image:
   path: https://picsum.photos/id/237/1200/630
@@ -52,40 +52,22 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 <script>
   function copyTemplate() {
     const code = document.getElementById('template-code').innerText;
-    const btn = document.getElementById('copy-btn');
-    const icon = document.getElementById('copy-icon');
-    const text = document.getElementById('copy-text');
-
-    navigator.clipboard.writeText(code).then(function() {
-      // Success State: Turn Green
-      btn.style.backgroundColor = "#28a745";
-      btn.style.color = "#fff";
-      btn.style.borderColor = "#28a745";
-      icon.className = 'fas fa-check';
-      text.innerText = 'OK';
-
-      // Revert after 2 seconds
-      setTimeout(function() {
-        btn.style.backgroundColor = "";
-        btn.style.color = "";
-        btn.style.borderColor = "";
-        icon.className = 'fas fa-copy';
-        text.innerText = 'Copy';
-      }, 2000);
-    });
+    navigator.clipboard.writeText(code);
+    // Alert popup has been removed for a silent copy
   }
 
   function loadGithubLink() {
-    var now = new Date();
-    var dateStr = now.toISOString().split('T')[0];
-    var org = "DemosAI-Foundation";
-    var repo = "Blog";
+    const now = new Date();
+    const dateStr = now.toISOString().split('T')[0];
     
-    // We removed the value= prefill to keep the URL clean and prevent SyntaxErrors
-    var githubUrl = "https://github.com/" + org + "/" + repo + "/new/main/_posts?filename=" + dateStr + "-guest-post.md";
+    const org = "DemosAI-Foundation";
+    const repo = "Blog";
+    
+    // Prefill 'value' parameter removed to ensure the file starts empty
+    const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&message=guest-post:%20new%20contribution`;
 
-    var linkEl = document.getElementById('gh-link');
-    var loaderEl = document.getElementById('gh-loader');
+    const linkEl = document.getElementById('gh-link');
+    const loaderEl = document.getElementById('gh-loader');
 
     if (linkEl && loaderEl) {
       linkEl.href = githubUrl;
@@ -94,9 +76,7 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
     }
   }
 
-  // Initialize
+  /* Initialization for standard and Pjax loads */
   loadGithubLink();
-  
-  // Chirpy uses Pjax for page transitions; this ensures the link loads when navigating
   document.addEventListener('pjax:success', loadGithubLink);
 </script>
