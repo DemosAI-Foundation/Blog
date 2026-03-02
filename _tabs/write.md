@@ -14,14 +14,14 @@ To contribute to **DemosAI-Foundation**, enter your post title and click the but
            style="width: 100%; max-width: 400px; padding: 10px; border-radius: 6px; border: 1px solid #ccc; color: #333;">
   </div>
 
-  <button id="submit-to-github" class="btn btn-primary btn-lg" style="cursor: pointer;">
+  <a href="javascript:void(0)" onclick="window.runGithubSubmission()" class="btn btn-primary btn-lg" style="text-decoration: none;">
     <i class="fab fa-github"></i> Open Editor on GitHub
-  </button>
+  </a>
 </div>
 
 ### Copy Template Example
 <div style="position: relative; margin-top: 1rem;">
-  <button id="copy-template-btn" class="btn btn-outline-secondary btn-sm" style="position: absolute; right: 10px; top: 10px; z-index: 10;">
+  <button onclick="window.runCopyTemplate()" class="btn btn-outline-secondary btn-sm" style="position: absolute; right: 10px; top: 10px; z-index: 10;">
     <i class="fas fa-copy"></i> Copy
   </button>
   <pre id="template-code" style="padding: 1.5rem; background: #f6f8fa; border-radius: 8px; border: 1px solid #ddd; text-align: left; overflow-x: auto; color: #333;">
@@ -38,70 +38,63 @@ Your content here...
 
 {% raw %}
 <script>
-(function() {
-  // 1. Slugify helper
-  const slugify = (text) => {
-    return text.toString().toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^\w\-]+/g, '')
-      .replace(/\-\-+/g, '-')
-      .replace(/^-+/, '')
-      .replace(/-+$/, '');
-  };
-
-  // 2. The Main Logic
-  const executeSubmission = () => {
-    const titleInput = document.getElementById('post-title').value.trim();
+  // 1. Attach functions to 'window' immediately so they are globally visible
+  window.runGithubSubmission = function() {
+    var titleEl = document.getElementById('post-title');
+    var titleInput = titleEl ? titleEl.value.trim() : "";
     
     if (!titleInput) {
       alert("Please enter a title first!");
       return;
     }
 
-    const now = new Date();
-    const dateStr = now.toISOString().split('T')[0];
-    const timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
-                    now.getMinutes().toString().padStart(2, '0') + ":00 +0800";
-    
-    const slug = slugify(titleInput) || "new-post";
-    const filename = `${dateStr}-${slug}.md`;
-    
-    const template = `---
-title: ${titleInput}
-date: ${dateStr} ${timeStr}
-categories: [Guestpost]
-tags: [ai, guestpost, open-source]
-pin: false
-image:
-  path: https://picsum.photos/id/237/1200/630
-  alt: Header image
----
+    var slugify = function(text) {
+      return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w\-]+/g, '')
+        .replace(/\-\-+/g, '-')
+        .replace(/^-+/, '')
+        .replace(/-+$/, '');
+    };
 
-## Introduction
-Write your content here.`;
+    var now = new Date();
+    var dateStr = now.toISOString().split('T')[0];
+    var timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
+                  now.getMinutes().toString().padStart(2, '0') + ":00 +0800";
+    
+    var slug = slugify(titleInput) || "new-post";
+    var filename = dateStr + "-" + slug + ".md";
+    
+    var template = "---\n" +
+      "title: " + titleInput + "\n" +
+      "date: " + dateStr + " " + timeStr + "\n" +
+      "categories: [Guestpost]\n" +
+      "tags: [ai, guestpost, open-source]\n" +
+      "pin: false\n" +
+      "image:\n" +
+      "  path: https://picsum.photos/id/237/1200/630\n" +
+      "  alt: Header image\n" +
+      "---\n\n" +
+      "## Introduction\n" +
+      "Write your content here.";
 
-    const encodedTemplate = encodeURIComponent(template);
-    const githubUrl = `https://github.com/DemosAI-Foundation/Blog/new/main/_posts?filename=${filename}&value=${encodedTemplate}&message=guest-post: ${encodeURIComponent(titleInput)}`;
+    var githubUrl = "https://github.com/DemosAI-Foundation/Blog/new/main/_posts" +
+      "?filename=" + encodeURIComponent(filename) + 
+      "&value=" + encodeURIComponent(template) + 
+      "&message=" + encodeURIComponent("guest-post: " + titleInput);
 
     window.open(githubUrl, '_blank');
   };
 
-  // 3. Event Listener (Delegation Pattern)
-  // This listens for clicks on the entire document but only acts if the ID matches.
-  // This survives Chirpy's Pjax page transitions.
-  document.addEventListener('click', function(event) {
-    if (event.target && event.target.id === 'submit-to-github' || event.target.closest('#submit-to-github')) {
-      event.preventDefault();
-      executeSubmission();
+  window.runCopyTemplate = function() {
+    var codeEl = document.getElementById('template-code');
+    if (codeEl) {
+      navigator.clipboard.writeText(codeEl.innerText).then(function() {
+        alert('Template copied!');
+      });
     }
-    
-    if (event.target && event.target.id === 'copy-template-btn' || event.target.closest('#copy-template-btn')) {
-      const code = document.getElementById('template-code').innerText;
-      navigator.clipboard.writeText(code).then(() => alert('Template copied!'));
-    }
-  });
+  };
 
-  console.log("DemosAI Writer Script Loaded Successfully");
-})();
+  console.log("DemosAI Scripts initialized on window.");
 </script>
 {% endraw %}
