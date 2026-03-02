@@ -20,7 +20,7 @@ To contribute to **DemosAI-Foundation**, use the button below. This will open th
 </div>
 
 ### Copy Template Example
-If you prefer to draft locally, you can copy this example structure:
+Please copy this example structure for the new post:
 
 <div style="position: relative; margin-top: 1rem;">
 <button onclick="copyTemplate()" class="btn btn-outline-secondary btn-sm" style="position: absolute; right: 10px; top: 10px; z-index: 10;">
@@ -28,15 +28,24 @@ If you prefer to draft locally, you can copy this example structure:
 </button>
 <pre id="template-code" style="padding: 1.5rem; background: #f6f8fa; border-radius: 8px; border: 1px solid #ddd; text-align: left; overflow-x: auto;">
 ---
-title: Insert title
+title: Welcome to the Future of AI
 date: 2026-02-28 14:30:00 +0800
 categories: [Guestpost]
-tags: [ai, guestpost]
+tags: [ai, guestpost, open-source]
 pin: false
+image:
+  path: https://picsum.photos/id/237/1200/630
+  alt: A descriptive caption for the header image.
 ---
 
 ## Introduction
-Lorem ipsum dolor sit amet
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+
+![Example Body Image](https://picsum.photos/id/1/800/400)
+_Optional: A caption for your image using Chirpy's italics syntax._
+
+## The Core Concept
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
 </pre>
 </div>
 
@@ -56,17 +65,22 @@ Lorem ipsum dolor sit amet
     const org = "DemosAI-Foundation";
     const repo = "Blog";
     
+    /* Pre-filling the GitHub link with image placeholders too */
     const template = `---
 title: "Your Post Title"
 date: ${dateStr} ${timeStr}:00 +0000
 categories: [Guest]
 tags: [contribution]
+image:
+  path: https://your-image-url.com/header.jpg
+  alt: Image description
 ---
 
-## My Post
+## Introduction
 
 Start typing here...
 
+![Body Image](https://your-image-url.com/image.jpg)
 `;
 
     const encodedTemplate = encodeURIComponent(template);
