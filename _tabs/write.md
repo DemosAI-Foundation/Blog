@@ -5,7 +5,7 @@ icon: fas fa-pen-nib
 order: 5
 ---
 
-To contribute to **DemosAI-Foundation**, use the button below to open the GitHub editor in a new tab. Then, copy the template below and paste it into the editor.
+To contribute to **DemosAI-Foundation**, use the button below to open the GitHub editor. Then, copy the template below and paste it into the new file.
 
 <div id="submission-box" style="margin: 2rem 0; padding: 40px; border: 2px dashed #666; border-radius: 12px; text-align: center;">
   <a id="gh-link" 
@@ -56,18 +56,20 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
     const icon = document.getElementById('copy-icon');
     const text = document.getElementById('copy-text');
 
-    navigator.clipboard.writeText(code).then(() => {
-      // Success State
-      btn.classList.replace('btn-outline-secondary', 'btn-success');
-      btn.style.color = '#fff';
-      icon.classList.replace('fa-copy', 'fa-check');
-      text.innerText = 'Copied!';
+    navigator.clipboard.writeText(code).then(function() {
+      // Success State - Turn Green
+      btn.style.backgroundColor = "#28a745";
+      btn.style.color = "#fff";
+      btn.style.borderColor = "#28a745";
+      icon.className = 'fas fa-check';
+      text.innerText = 'OK';
 
       // Revert after 2 seconds
-      setTimeout(() => {
-        btn.classList.replace('btn-success', 'btn-outline-secondary');
-        btn.style.color = '';
-        icon.classList.replace('fa-check', 'fa-copy');
+      setTimeout(function() {
+        btn.style.backgroundColor = "";
+        btn.style.color = "";
+        btn.style.borderColor = "";
+        icon.className = 'fas fa-copy';
         text.innerText = 'Copy';
       }, 2000);
     });
@@ -76,13 +78,12 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
   function loadGithubLink() {
     const now = new Date();
     const dateStr = now.toISOString().split('T')[0];
-    
     const org = "DemosAI-Foundation";
     const repo = "Blog";
     
-    // Minimal template just to give them a starting point
-    const minimalTemplate = encodeURIComponent("---\n\n---");
-    const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-new-post.md&value=${minimalTemplate}&message=guest-post:%20new%20contribution`;
+    // Minimal value to avoid URL length issues
+    const val = encodeURIComponent("---\ntitle: \n---");
+    const githubUrl = "https://github.com/" + org + "/" + repo + "/new/main/_posts?filename=" + dateStr + "-new-post.md&value=" + val;
 
     const linkEl = document.getElementById('gh-link');
     const loaderEl = document.getElementById('gh-loader');
@@ -94,7 +95,8 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
     }
   }
 
-  /* Initialization for standard and Pjax loads */
+  // Load on initial visit
   loadGithubLink();
+  // Load on Pjax navigation (Chirpy specific)
   document.addEventListener('pjax:success', loadGithubLink);
 </script>
