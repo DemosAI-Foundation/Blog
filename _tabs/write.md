@@ -51,18 +51,19 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 
 <script>
   function copyTemplate() {
-    const code = document.getElementById('template-code').innerText;
-    // Copying to clipboard without the alert popup
-    navigator.clipboard.writeText(code);
-  }
+  const code = document.getElementById('template-code').innerText;
+  navigator.clipboard.writeText(code);
+}
 
   function loadGithubLink() {
     const now = new Date();
     const dateStr = now.toISOString().split('T')[0];
+    const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
     
     const org = "DemosAI-Foundation";
     const repo = "Blog";
     
+    /* Pre-filling the GitHub link with image placeholders too */
     const template = `RENAME FILE ABOVE IN ACCORDANCE TO CHIRPY FORMAT: YYYY-MM-DD-TITLE; UNIQUE FILENAME IS MANDATORY`;
 
     const encodedTemplate = encodeURIComponent(template);
