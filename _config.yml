@@ -22,6 +22,7 @@ description: >-
 
 # Protocol & hostname for your site
 url: "http://demosai.org/ 
+baseurl: ""
 
 github:
   username: DemosAI-Foundation
