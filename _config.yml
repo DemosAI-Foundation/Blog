@@ -21,7 +21,7 @@ description: >-
   towards artificial general intelligence.
 
 # Protocol & hostname for your site
-url: "http://demosai.org/ 
+url: "https://demosai.org"
 baseurl: ""
 
 github:
