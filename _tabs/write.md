@@ -28,8 +28,8 @@ Please copy this example structure for the new post:
 </button>
 <pre id="template-code" style="padding: 1.5rem; background: #f6f8fa; border-radius: 8px; border: 1px solid #ddd; text-align: left; overflow-x: auto;">
 ---
-title: Welcome to the Future of AI
-slug: welcome-to-the-future-of-ai
+title: TITLE
+slug: title
 date: 2026-02-28 14:30:00 +0800
 categories: [Guestpost]
 tags: [ai, guestpost, open-source]
@@ -63,7 +63,7 @@ function loadGithubLink() {
   const org = "DemosAI-Foundation";
   const repo = "Blog";
 
-  const rawTitle = "Welcome to the Future of AI";
+  const rawTitle = "TITLE";
   const slugTitle = rawTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const randomCode = Array.from({length: 6}, () => 'abcdefghijklmnopqrstuvwxyz'[Math.floor(Math.random() * 26)]).join('');
   const filename = `${dateStr}-${slugTitle}-${randomCode}.md`;
