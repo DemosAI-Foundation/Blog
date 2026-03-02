@@ -5,7 +5,7 @@ icon: fas fa-pen-nib
 order: 5
 ---
 
-To contribute to **DemosAI-Foundation**, use the button below. This will open the GitHub editor in a new tab to create a new post.
+To contribute to **DemosAI-Foundation**, use the button below. This will open the GitHub editor in a new tab with a pre-filled template.
 
 <div id="submission-box" style="margin: 2rem 0; padding: 40px; border: 2px dashed #666; border-radius: 12px; text-align: center;">
   <a id="gh-link" 
@@ -52,19 +52,39 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 <script>
   function copyTemplate() {
     const code = document.getElementById('template-code').innerText;
-    navigator.clipboard.writeText(code);
-    // Alert popup has been removed for a silent copy
+    navigator.clipboard.writeText(code).then(() => {
+      alert('Template copied to clipboard!');
+    });
   }
 
   function loadGithubLink() {
     const now = new Date();
     const dateStr = now.toISOString().split('T')[0];
+    const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
     
     const org = "DemosAI-Foundation";
     const repo = "Blog";
     
-    // Prefill 'value' parameter removed to ensure the file starts empty
-    const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&message=guest-post:%20new%20contribution`;
+    /* Pre-filling the GitHub link with image placeholders too */
+    const template = `---
+title: "Your Post Title"
+date: ${dateStr} ${timeStr}:00 +0000
+categories: [Guest]
+tags: [contribution]
+image:
+  path: https://your-image-url.com/header.jpg
+  alt: Image description
+---
+
+## Introduction
+
+Start typing here...
+
+![Body Image](https://your-image-url.com/image.jpg)
+`;
+
+    const encodedTemplate = encodeURIComponent(template);
+    const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
 
     const linkEl = document.getElementById('gh-link');
     const loaderEl = document.getElementById('gh-loader');
