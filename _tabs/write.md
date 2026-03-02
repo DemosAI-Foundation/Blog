@@ -5,7 +5,7 @@ icon: fas fa-pen-nib
 order: 5
 ---
 
-To contribute to **DemosAI-Foundation**, use the button below. This will open the GitHub editor in a new tab with a pre-filled template.
+To create an Guest post .md file for **DemosAI-Blog**, use the button below. Copy the Chirpy template below to get started!
 
 <div id="submission-box" style="margin: 2rem 0; padding: 40px; border: 2px dashed #666; border-radius: 12px; text-align: center;">
   <a id="gh-link" 
