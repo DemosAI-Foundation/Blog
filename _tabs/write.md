@@ -68,7 +68,7 @@ function loadGithubLink() {
   const randomCode = Array.from({length: 6}, () => 'abcdefghijklmnopqrstuvwxyz'[Math.floor(Math.random() * 26)]).join('');
   const filename = `${dateStr}-${slugTitle}-${randomCode}.md`;
 
-  const template = `RENAME FILE ABOVE IN ACCORDANCE TO CHIRPY FORMAT: YYYY-MM-DD-TITLE; UNIQUE FILENAME IS MANDATORY`;
+  const template = `RENAME FILE ABOVE IN ACCORDANCE TO CHIRPY FORMAT, ONLY CHANGE TITLE: YYYY-MM-DD-TITLE-ABCDEF; UNIQUE FILENAME IS MANDATORY`;
   const encodedTemplate = encodeURIComponent(template);
   const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${filename}&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
 
