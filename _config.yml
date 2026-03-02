@@ -61,7 +61,7 @@ pageviews:
 theme_mode: 
 
 # Avatar on sidebar (local path or URL)
-avatar: 
+avatar: /assets/img/favicons/ascii-art-125.png
 
 # Social preview image for SEO (og:image)
 social_preview_image: 
