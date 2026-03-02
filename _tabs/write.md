@@ -66,7 +66,7 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
     const repo = "Blog";
     
     /* Pre-filling the GitHub link with image placeholders too */
-    const template = `RENAME FILE`;
+    const template = `RENAME FILE ABOVE IN ACCORDANCE TO CHIRPY FORMAT: YYYY-MM-DD-TITLE; UNIQUE FILENAME IS MANDATORY`;
 
     const encodedTemplate = encodeURIComponent(template);
     const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
