@@ -29,6 +29,7 @@ Please copy this example structure for the new post:
 <pre id="template-code" style="padding: 1.5rem; background: #f6f8fa; border-radius: 8px; border: 1px solid #ddd; text-align: left; overflow-x: auto;">
 ---
 title: Welcome to the Future of AI
+slug: welcome-to-the-future-of-ai
 date: 2026-02-28 14:30:00 +0800
 categories: [Guestpost]
 tags: [ai, guestpost, open-source]
@@ -55,29 +56,30 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
   navigator.clipboard.writeText(code);
 }
 
-  function loadGithubLink() {
-    const now = new Date();
-    const dateStr = now.toISOString().split('T')[0];
-    const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-    
-    const org = "DemosAI-Foundation";
-    const repo = "Blog";
-    
-    /* Pre-filling the GitHub link with image placeholders too */
-    const template = `RENAME FILE ABOVE IN ACCORDANCE TO CHIRPY FORMAT: YYYY-MM-DD-TITLE; UNIQUE FILENAME IS MANDATORY`;
+function loadGithubLink() {
+  const now = new Date();
+  const dateStr = now.toISOString().split('T')[0];
 
-    const encodedTemplate = encodeURIComponent(template);
-    const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
+  const org = "DemosAI-Foundation";
+  const repo = "Blog";
 
-    const linkEl = document.getElementById('gh-link');
-    const loaderEl = document.getElementById('gh-loader');
+  const rawTitle = "Welcome to the Future of AI";
+  const slugTitle = rawTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const randomCode = Array.from({length: 6}, () => 'abcdefghijklmnopqrstuvwxyz'[Math.floor(Math.random() * 26)]).join('');
+  const filename = `${dateStr}-${slugTitle}-${randomCode}.md`;
 
-    if (linkEl && loaderEl) {
-      linkEl.href = githubUrl;
-      linkEl.style.display = 'inline-block';
-      loaderEl.style.display = 'none';
-    }
+  const template = `RENAME FILE ABOVE IN ACCORDANCE TO CHIRPY FORMAT: YYYY-MM-DD-TITLE; UNIQUE FILENAME IS MANDATORY`;
+  const encodedTemplate = encodeURIComponent(template);
+  const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${filename}&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
+
+  const linkEl = document.getElementById('gh-link');
+  const loaderEl = document.getElementById('gh-loader');
+  if (linkEl && loaderEl) {
+    linkEl.href = githubUrl;
+    linkEl.style.display = 'inline-block';
+    loaderEl.style.display = 'none';
   }
+}
 
   /* Initialization for standard and Pjax loads */
   loadGithubLink();
