@@ -5,31 +5,76 @@ icon: fas fa-pen-nib
 order: 5
 ---
 
-To contribute to **DemosAI-Foundation**, use the button below. This will open the GitHub editor in a new tab with a pre-filled template.
+To contribute to **DemosAI-Foundation**, enter your post title below and click the button. This will open the GitHub editor with your template pre-filled.
 
 <div id="submission-box" style="margin: 2rem 0; padding: 40px; border: 2px dashed #666; border-radius: 12px; text-align: center;">
+  <div style="margin-bottom: 1.5rem;">
+    <label for="post-title" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Post Title:</label>
+    <input type="text" id="post-title" placeholder="Enter your post title here..." 
+           style="width: 100%; max-width: 400px; padding: 10px; border-radius: 6px; border: 1px solid #ccc; color: #333;">
+  </div>
+
   <a id="gh-link" 
      href="#" 
      target="_blank" 
      rel="noopener noreferrer" 
      class="btn btn-primary btn-lg" 
-     style="display: none; text-decoration: none; margin-bottom: 1rem;">
+     style="text-decoration: none;">
     <i class="fab fa-github"></i> Open Editor on GitHub
   </a>
-  <p id="gh-loader">Loading your secure editor link...</p>
 </div>
 
 ### Copy Template Example
-Please copy this example structure for the new post:
-
 <div style="position: relative; margin-top: 1rem;">
 <button onclick="copyTemplate()" class="btn btn-outline-secondary btn-sm" style="position: absolute; right: 10px; top: 10px; z-index: 10;">
   <i class="fas fa-copy"></i> Copy
 </button>
-<pre id="template-code" style="padding: 1.5rem; background: #f6f8fa; border-radius: 8px; border: 1px solid #ddd; text-align: left; overflow-x: auto;">
+<pre id="template-code" style="padding: 1.5rem; background: #f6f8fa; border-radius: 8px; border: 1px solid #ddd; text-align: left; overflow-x: auto; color: #333;">
 ---
 title: Welcome to the Future of AI
-date: 2026-02-28 14:30:00 +0800
+date: 2026-03-02 14:30:00 +0800
+categories: [Guestpost]
+tags: [ai, guestpost, open-source]
+---
+## Introduction
+Your content here...
+</pre>
+</div>
+
+<script>
+  function slugify(text) {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')           // Replace spaces with -
+      .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+      .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+      .replace(/^-+/, '')             // Trim - from start of text
+      .replace(/-+$/, '');            // Trim - from end of text
+  }
+
+  function generateGithubLink(e) {
+    const titleInput = document.getElementById('post-title').value.trim();
+    
+    if (!titleInput) {
+      alert("Please enter a title before proceeding!");
+      e.preventDefault();
+      return;
+    }
+
+    const now = new Date();
+    const dateStr = now.toISOString().split('T')[0];
+    const timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
+                    now.getMinutes().toString().padStart(2, '0') + ":00 +0800";
+    
+    const slug = slugify(titleInput) || "new-post";
+    const filename = `${dateStr}-${slug}.md`;
+    
+    const org = "DemosAI-Foundation";
+    const repo = "Blog";
+    
+    // The actual template with the injected title
+    const template = `---
+title: ${titleInput}
+date: ${dateStr} ${timeStr}
 categories: [Guestpost]
 tags: [ai, guestpost, open-source]
 pin: false
@@ -39,49 +84,22 @@ image:
 ---
 
 ## Introduction
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+Write your introduction here.`;
 
-![Example Body Image](https://picsum.photos/id/1/800/400)
-_Optional: A caption for your image using Chirpy's italics syntax._
+    const encodedTemplate = encodeURIComponent(template);
+    const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${filename}&value=${encodedTemplate}&message=guest-post:%20${encodeURIComponent(titleInput)}`;
 
-## The Core Concept
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-</pre>
-</div>
+    window.open(githubUrl, '_blank');
+    e.preventDefault();
+  }
 
-<script>
+  // Attach the event listener to the button
+  document.getElementById('gh-link').addEventListener('click', generateGithubLink);
+
   function copyTemplate() {
     const code = document.getElementById('template-code').innerText;
     navigator.clipboard.writeText(code).then(() => {
-      alert('Template copied to clipboard!');
+      alert('Template copied!');
     });
   }
-
-  function loadGithubLink() {
-    const now = new Date();
-    const dateStr = now.toISOString().split('T')[0];
-    const timeStr = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-    
-    const org = "DemosAI-Foundation";
-    const repo = "Blog";
-    
-    /* Pre-filling the GitHub link with image placeholders too */
-    const template = ``;
-
-    const encodedTemplate = encodeURIComponent(template);
-    const githubUrl = `https://github.com/${org}/${repo}/new/main/_posts?filename=${dateStr}-guest-post.md&value=${encodedTemplate}&message=guest-post:%20new%20contribution`;
-
-    const linkEl = document.getElementById('gh-link');
-    const loaderEl = document.getElementById('gh-loader');
-
-    if (linkEl && loaderEl) {
-      linkEl.href = githubUrl;
-      linkEl.style.display = 'inline-block';
-      loaderEl.style.display = 'none';
-    }
-  }
-
-  /* Initialization for standard and Pjax loads */
-  loadGithubLink();
-  document.addEventListener('pjax:success', loadGithubLink);
 </script>
