@@ -5,7 +5,7 @@ categories: [Guestpost]
 tags: [ai, guestpost, open-source]
 pin: false
 image:
-  path: https://picsum.photos/id/237/1200/630](https://upload.wikimedia.org/wikipedia/commons/a/a4/Le_Penseur_by_Rodin_%28Kunsthalle_Bielefeld%29_2014-04-10.JPG
+  path: https://picsum.photos/id/1/800/400
   alt: A descriptive caption for the header image.
 ---
 
