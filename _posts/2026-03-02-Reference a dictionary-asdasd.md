@@ -6,7 +6,7 @@ categories: [Prompting]
 tags: [prompt, llm, system]
 pin: false
 image:
-  path: https://picsum.photos/id/1/800/400
+  path: https://upload.wikimedia.org/wikipedia/commons/5/5c/Woerterbuchstapel_Langenscheidt.jpg
   alt: So easy a dog can do it
 ---
 
@@ -16,14 +16,16 @@ with my previous work of having the LLM "look up" a dictionary before answering.
 
 It is a bit convulated, and could easily be turned into a system but here is a step by step guide on how to improve your long, technical answers:
 
-### Write this before you original question or prompt, works best on shorter ones.
+### 1. Write this before you original question or prompt, works best on shorter ones.
 ```
 Define each word in the prompt based on its context, using a dictionary:
 ```
-### Then from that, still in the same context window have it generate a question
+### 2. Then from that, still in the same context window have it generate a question
 ```
 Based on these words and their definitions, create a lengthy and descriptive question:
 ```
-### Now one of the key parts, avoiding context rot
+### 3. Now one of the key parts, avoiding context rot
 Open a new chat window or clear your context and propose the generated question.
-The answers are very verbose but factually correct, as much as LLMs tend to be. It even managed to solve the infamous "strawberry double R" problem once upon a time. All without "thinking" tags etc.
+The answers are very verbose but factually correct, as much as LLMs tend to be. 
+
+It even managed to solve the infamous "strawberry double R" problem once upon a time. All without "thinking" tags etc.
