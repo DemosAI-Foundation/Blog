@@ -12,7 +12,7 @@ image:
 
 ## *Boris in your terminal!*
 
-PROJECT HERE: https://github.com/DemosAI-Foundation/BorisCode
+**PROJECT HERE: [BorisCode](https://github.com/DemosAI-Foundation/BorisCode)**
 
 BorisCode automatically learns from mistakes, plans, critiques, reviews code, reviews security etc.
 
