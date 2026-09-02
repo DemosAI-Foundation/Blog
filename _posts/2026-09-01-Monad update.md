@@ -7,7 +7,7 @@ tags: [code, llm, agent]
 pin: false
 image:
   path: https://demosai.org/assets/img/posts/monadUpdt.png
-  alt: "Now more 30% more brain!"
+  alt: "Now with 30% more brain!"
 ---
 
 **PROJECT HERE: [Monad](https://github.com/DemosAI-Foundation/Monad)**
