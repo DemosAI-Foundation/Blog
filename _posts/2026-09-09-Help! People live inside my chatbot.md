@@ -27,6 +27,28 @@ The study shows that if you ask the LLM to act as a persona, it degrades perform
 
 What this comes back to is that, yes real people are living inside your chatbot, at least the trail of them: how they write, how they act on the internet, what type of work they do, how they ask questions, how they answer them, what the pressed like on in A and B testing, how they engineered the LLM. 
 
+In the mean while here's a short recipe for how to improve your answers in any chatbot:
+
+1. Write: "I need to convert questions and statements into objective and non biased ones:
+
+Exmaple: How do I do X thing the best way? To: How is X thing performed in the most optimal way?"
+
+2. In same chat write:"transform this question based on above:[YOUR QUESTION]"
+
+3. Paste the Question into a new chat, and put this before it: "Break down this statement into multiple sub problems:"
+
+4. For each subproblem listed in the answer, start a new chat (Important!)
+
+5. Paste all the answers you get into a new chat and this text:
+
+"Synthesize the answers listed into one:
+Where they overlap, merge
+Where they disagree or differ, leave in, but rewrite to point out the contrasting views."
+
+Style can be used for the final results to make it more readable, usually "Style should be very succinct." works the best to cut out verbosity, but keeping the details. If readability is preffered use Style: "Write the answer at an 8th-grade reading level"
+
+Voila! You have an answer that has activated and avoided such pitfalls as Solomons paradox and multiple others.
+
 Since I know not many people have the time of day, interest or the capability to perform such queries, and implementing best practices takes training and skill, but I feel that they should still benefit from such improvements, be they even how minor (but we are talking over 70% increase in some tasks), I've set out out to create such system and later also create a custom LLM with these already accounted for.
 
 It will be a journey, but not a long one since I've already taught LLMs to speak proper finnish, sell and market things better and to identify objects properly.
