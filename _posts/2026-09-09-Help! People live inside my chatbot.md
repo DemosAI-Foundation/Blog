@@ -47,7 +47,7 @@ Where they disagree or differ, leave in, but rewrite to point out the contrastin
 
 Style can be used for the final results to make it more readable, usually "Style should be very succinct." works the best to cut out verbosity, but keeping the details. If readability is preffered use Style: "Write the answer at an 8th-grade reading level"
 
-Voila! You have an answer that has activated and avoided such pitfalls as Solomons paradox and multiple others.
+Voila! You have an answer that has activated the expert people and avoided such pitfalls as Solomons paradox and multiple others.
 
 Since I know not many people have the time of day, interest or the capability to perform such queries, and implementing best practices takes training and skill, but I feel that they should still benefit from such improvements, be they even how minor (but we are talking over 70% increase in some tasks), I've set out out to create such system and later also create a custom LLM with these already accounted for.
 
