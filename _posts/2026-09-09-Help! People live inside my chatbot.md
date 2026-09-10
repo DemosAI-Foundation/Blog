@@ -1,9 +1,9 @@
 ---
-title: Monad update
-slug: Monadupdate
+title: Help! People live inside my chatbot.
+slug: peopleinsidellm
 date: 2026-09-01 15:30:00 +0800
 categories: [Code]
-tags: [code, llm, agent]
+tags: [llm, model]
 pin: false
 image:
   path: https://demosai.org/assets/img/posts/pplwrk.png
