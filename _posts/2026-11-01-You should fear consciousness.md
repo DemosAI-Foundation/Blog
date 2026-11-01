@@ -6,7 +6,7 @@ categories: [Essay]
 tags: [essay]
 pin: false
 image:
-  path: https://demosai.org/assets/img/posts/pplwrk.png
+  path: https://demosai.org/assets/img/posts/lottothink.png
   alt: "Consciousness is the thing in between"
 ---
 
