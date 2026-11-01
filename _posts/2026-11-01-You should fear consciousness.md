@@ -66,7 +66,9 @@ So what am I trying to say? I started this blog post with an idea of an essay fo
 
 So why should you fear consciousness? You shouldn't (haha, I promise this was the last time I played a trick!), otherwise you should fear yourself and what actually controls you.
 
-## The analysis of my writing from the OEE
+## The analysis of my writing from the OEE, OEE project
+
+**PROJECT HERE: [OEE](https://github.com/DemosAI-Foundation/OpenEpistemicEngine)**
 
 ## OEE Assistant
 
