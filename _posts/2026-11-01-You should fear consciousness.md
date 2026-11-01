@@ -23,9 +23,9 @@ No that's not possible.
 
 See it gets interesting dear reader when I present you with examples. Even I cannot predict what I will think of next, I can only, as a presumed conscious being make choices once they appear, seemingly out of thin air.
 
-This is the real dilemma I was starting to mention earlier, where does one draw the line for consciousness and subconsciousness, so that it can actually form? 
+This is the real dilemma I was starting to mention earlier, where does one draw the line for consciousness and subconsciousness, so that concscious thinking can actually form? 
 
-I have made great progress on many projects, Monad and my favourite new tool that seemingly replicates the pattern of critical thinking, even under pressure. I call it OpenEpistemicEngine, after Epistemic, the art of understanding knowledge.
+I have made great progress on many projects, Monad and my favourite new tool that seemingly replicates the pattern of critical thinking, even under pressure. I call it OpenEpistemicEngine, after epistemics, the art of understanding knowledge.
 
 I plan to feed this text to it and see what it spits out, see it at the end!
 
